@@ -1,9 +1,12 @@
 const express = require("express");
+const userRouter = require("../src/routes/users.router");
 
 const app = express();
 
 app.use(express.json());
 
+
+app.use("/users", userRouter);
 
 app.get("/", (request, response) => {
     response.json({
