@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { post } = require("../server");
 
 const postSchema = new mongoose.Schema({
     title: {
@@ -25,16 +24,16 @@ const postSchema = new mongoose.Schema({
         trim: true,
         ref: "User"
     },
-    creatad_at: {
-        type: new Date(),
+    created_at: {
+        type: Date,
         required: true,
         default: new Date(),
     },
     updated_at: {
-        reype: new Date(),
+        type: Date,
         required: true,
-        default: new Date()
-    }
+        default: new Date(),
+    },
 });
 
 module.exports = mongoose.model("posts", postSchema);
