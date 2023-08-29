@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const createError = require("http-errors");
 const User = require("../models/user.model");
+const bcrypt = require("../lib/bcrypt");
 
 async function create(userObject) {
     const userExist = await User.findOne({ email: userObject.email });
@@ -16,6 +17,8 @@ async function create(userObject) {
     }
 
     //Agregar password hash con libreria de bcrypt encrypt
+    const passwordHash = bcrypt.encrypt(userObject.password);
+    userObject.password = passwordHash;
 
     const newUser = await User.create(userObject);
     return newUser;
