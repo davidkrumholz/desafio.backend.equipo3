@@ -18,6 +18,16 @@ const postSchema = new mongoose.Schema({
         required: [true, "The body is required"],
         trim: true
     },
+    tags: {
+        type: [String],
+        required: true,
+        validate: {
+            validator: function (value) {
+                return Array.isArray(value) && value.length > 0;
+            },
+            message: "at least one tag required",
+        },
+    },
     user: {
         type: mongoose.SchemaTypes.ObjectId,
         required: [true, "User is required"],
